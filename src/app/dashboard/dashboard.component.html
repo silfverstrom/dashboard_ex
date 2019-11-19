@@ -1,0 +1,9 @@
+<div>
+  <!-- widget -->
+  <widget
+    *ngFor="let widget of widgetData"
+    [widget]="widget"
+    (refreshData)="loadData()"
+    >
+  </widget>
+</div>

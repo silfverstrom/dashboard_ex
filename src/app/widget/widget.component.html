@@ -1,0 +1,24 @@
+<h1>{{widget.name}}</h1>
+<button (click)="sendRefresh()">
+  refresh
+</button>
+<div *ngIf="widget.type === 'table'">
+  <table>
+    <tr *ngFor="let row of widget.data">
+      <td>{{row.year}}</td>
+      <td>{{row.value}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="widget.type === 'mean'">
+  <table>
+    <tr>
+      <td>Number of years</td>
+      <td>Mean value</td>
+    </tr>
+    <tr>
+      <td>{{getNumberOfYears()}}</td>
+      <td>{{getMeanValues()}}</td>
+    </tr>
+  </table>
+</div>
