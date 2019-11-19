@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { loadData } from '../../utils/data_helpers'
+import { DashboardService } from '../dashboard.service';
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,12 +8,14 @@ import { loadData } from '../../utils/data_helpers'
 export class DashboardComponent {
 
   widgetData;
-  constructor() {
-    this.widgetData = loadData();
+  constructor(private dashboardService: DashboardService) {
+    this.widgetData = this.dashboardService.getData();
   }
 
   loadData() {
-    this.widgetData = loadData();
+    this.dashboardService.loadData();
+    this.widgetData = this.dashboardService.getData();
+
   }
 
 }

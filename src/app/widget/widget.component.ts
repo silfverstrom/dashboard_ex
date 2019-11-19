@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'widget',
@@ -9,7 +10,7 @@ import { Output, EventEmitter } from '@angular/core';
 export class WidgetComponent  {
   @Input() widget;
   @Output() refreshData = new EventEmitter<boolean>();
-  constructor() { }
+  constructor(private helperService: HelperService) { }
 
   ngOnInit() {
   }
@@ -17,16 +18,10 @@ export class WidgetComponent  {
     this.refreshData.emit(true);
   }
   getNumberOfYears() {
-    return this.widget.data.length;
+    return this.helperService.getNumberOfYears(this.widget)
   }
   getMeanValues() {
-    const values =
-      this.widget.data.map((row) => row.value)
-    const sum = values.reduce((a,b) => {
-      return a + b
-    },0)
-    const length = this.getNumberOfYears()
-    return Math.round(sum/length)
+    return this.helperService.getMeanValues(this.widget)
   }
 
 }
