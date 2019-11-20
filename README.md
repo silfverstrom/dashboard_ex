@@ -1,92 +1,56 @@
-# Exercises
+# Exercise - Car Dashboard
 
-In this course we are going to progresively build a Dashboard-application,
-which we will extend as we learn new things.
+In this exercise we are going to build a dashboard that shows car registrations per brand.
+In this repository you will find the following utils to help you.
 
-The dashboard will take data from a server, and display it on a dashboard
-in multiple formats.
+* server.js - a express server with data. GET /data returns JSON data. Every 5
+  seconds new data is added to the server
+* src/app/linechart.component.ts. A google chart showing mocked data.
 
----
-# Exercise 1
-
-In this exercise we will create a couple of base components, that takes data
-and renders them on screen. When done, we should have
-
-* app.component - Base component
-* dashboard.componnet: Renders list of Widgets on Dashboard
-* widget.component: Renders a widget on the Dashboard
-
-----
-In the end, it should look like this.
-
-<img src="img/end.png">
-----
-Step one, clone this angular repository
-
+## Fetching data
+We can fetch data at port 3000 if we run node server.js
 ```
-git clone the repo
-and make sure that it runs
-cd dashboard_demo
-npm install
-npm run start
+node server.js
+# go to broser localhost:3000/data to see json
 ```
-
-Then navigate to dashboard_demo in your favourite editor. 
-----
-Step two, create a new component in app/ called dashboard.
-The component should consist of a typescript/html and css-file.
-
-Take a look at app.component.ts if this looks confusing.
-
-----
-Step three,
-In your new component, define an Interface to fetch WidgetData.
-Then use the helper found in data_helpers to load mocked data.
-
+The data has the following structure
 ```
-import {loadData, Data} from '../utils/data_helpers'
-
-interface WidgetData {
-    name: string;
-    type: string;
-    data: Data;
-};
-@Component({
-  selector: 'dashboard-component',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
-})
-export class DashboardComponent {
-    widgetData: WidgetData = loadData()
+{
+    data: [
+        {
+            brand, // volvo, mercedes, scania etc
+            type, // pb, lb, tlb (personal car, light truck, heavy truck)
+            color, // red green blue etc
+            registration_date, // date when car was sold
+    ]
 }
 ```
-----
-Step four,
-Create a new component called widget.
 
-The widget should take three inputs (you remember @Input right?)
+## What should the application do?
 
-* name, type and Data
+The application should show the data from GET /data in a chart and in a table.
+The data should also be filterable.
 
-The component should also have one event called refresh (Using @Output)
-----
+## Great, so how do we do that?
 
-In the Widget View, render the data.
+When building angular applications it is a good idea to think how the application could be represented in components.
 
-* If type === table, render a table of year/values.
-* If type === Mean, render a widget that shows two values. Number of years, Mean-value.
-----
-Now, add an event listener for the refresh @Output.
-When pressed, dashboard.component should load new data.
-----
-Last step. 
+When designing the application we need 
 
-* Add your new components to **declarations** in app.module.ts
-* Render the Dashboard Component in App
-* In Dashboard, render one Widget component for each value in widgetData
-----
-If it looks like this, you've made it!
+* LinechartComponent - should show data in chart.
+* TableComponent - should list all raw data in a table, and be paged at 20
+  entries per page.
+* FilterComponent - A component allowing the user to specify a brand, type or
+  date to filter data on.
+* DashboardComponent - Renders table.component, filter.component, linechart.component
+* DataService - Fetches data from server. Should have methods. +loadData()
+  +filterPerBrand(brand) +filterPerType(type), +filterPerDate(minDate, maxDate).
 
-<img src="img/end.png">
+## How do i add components and services?
 
+We can do it manually, or use the generator bundled with angular
+
+```
+    ng generate component TableComponent
+```
 
