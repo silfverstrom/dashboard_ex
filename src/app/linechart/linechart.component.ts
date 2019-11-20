@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {DataService } from '../data.service'
 @Component({
   selector: 'app-linechart',
   templateUrl: './linechart.component.html',
@@ -15,14 +15,24 @@ export class LinechartComponent implements OnInit {
       ['Scania', 12],
    ];
    columnNames = ['Brand', 'Total'];
-   options = {    
+   options = {
    };
    width = 550;
    height = 400;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.startStream();
+    this.dataService.getStream().subscribe((data) => {
+      console.log(data.data);
+      if (data.data) {
+        this.data = [
+          ['Total', +data.data.length]
+        ]
+      }
+
+    })
   }
 
 }

@@ -3,14 +3,17 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LinechartComponent } from './linechart/linechart.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
       AppComponent,
       LinechartComponent,
   ],
+  providers: [DataService],
   imports: [
-  BrowserModule,GoogleChartsModule
+      BrowserModule,GoogleChartsModule, HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
