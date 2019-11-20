@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
+  brandFilter = null;
   stream: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(private http: HttpClient) { }
@@ -23,8 +24,16 @@ export class DataService {
     if (data === undefined) {
       return [];
     }
+    //Filter first
+    let filteredData = data;
+    if (this.brandFilter) {
+       filteredData = data.filter((car) => {
+        return this.brandFilter === car.brand
+      })
+    }
+
     const obj = {}
-    for (let car of data) {
+    for (let car of filteredData) {
       if (!obj[car.brand]) {
         obj[car.brand] = 0;
       }
@@ -37,11 +46,8 @@ export class DataService {
     }
     return res;
   }
-  filter() {
-    const filteredData = this.stream.data.getValue().filter((val) => {
-      return val.brand == 'volvo'
-    })
-    this.stream.next(filteredData)
+  filterOnBrand(brand) {
+    this.brandFilter = brand;
   }
   getStream() {
     return this.stream;
