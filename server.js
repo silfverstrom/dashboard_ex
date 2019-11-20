@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const port = 3000
+function getRandomArbitrary(min, max) {
+  return +Math.round(Math.random() * (max - min) + min);
+}
 
 // Add headers
 app.use(function (req, res, next) {
@@ -34,6 +37,7 @@ function createRandomData() {
   const color = COLORS[getRandomArbitrary(0,COLORS.length -1)];
   const type = TYPES[getRandomArbitrary(0,TYPES.length -1)];
 
+
   const car = {
     brand,
     color,
@@ -42,9 +46,6 @@ function createRandomData() {
   }
   cached_data.push(car);
   
-}
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
 }
 
 app.get('/', (req, res) => res.send(''))
