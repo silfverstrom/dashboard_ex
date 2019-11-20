@@ -24,14 +24,8 @@ export class LinechartComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.startStream();
-    this.dataService.getStream().subscribe((data) => {
-      console.log(data.data);
-      if (data.data) {
-        this.data = [
-          ['Total', +data.data.length]
-        ]
-      }
-
+    this.dataService.getStream().subscribe((res) => {
+      this.data = this.dataService.prepareForChart(res.data);
     })
   }
 
