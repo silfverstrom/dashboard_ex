@@ -6,12 +6,14 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { FilterComponent } from './filter/filter.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
       AppComponent,
       LinechartComponent,
       FilterComponent,
+      TableComponent,
   ],
   providers: [DataService],
   imports: [
