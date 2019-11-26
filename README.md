@@ -49,7 +49,7 @@ import {loadData, Data} from '../utils/data_helpers'
 interface WidgetData {
     name: string;
     type: string;
-    data: Data;
+    data: any[];
 };
 @Component({
   selector: 'dashboard-component',
@@ -57,7 +57,7 @@ interface WidgetData {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-    widgetData: WidgetData = loadData()
+    widgetData: WidgetData[] = loadData()
 }
 ```
 ----
