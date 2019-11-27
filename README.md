@@ -11,7 +11,7 @@ In this repository you will find the following utils to help you.
 We can fetch data at port 3000 if we run node server.js
 ```
 node server.js
-# go to broser localhost:3000/data to see json
+# go to browser localhost:3000/data to see json
 ```
 The data has the following structure
 ```
