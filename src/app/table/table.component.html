@@ -1,0 +1,13 @@
+<h2>Table!</h2>
+<table>
+  <tr>
+    <td>Brand</td>
+    <td>Color</td>
+  </tr>
+  <tr *ngFor="let car of tableData">
+    <td>{{car.brand}}</td>
+    <td>{{car.color}}</td>
+  </tr>
+</table>
+
+<span (click)="setStartPage(page)" *ngFor="let page of pages">{{page + " "}}</span>
