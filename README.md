@@ -22,6 +22,7 @@ The data has the following structure
             type, // pb, lb, tlb (personal car, light truck, heavy truck)
             color, // red green blue etc
             registration_date, // date when car was sold
+        }
     ]
 }
 ```
