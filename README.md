@@ -51,6 +51,6 @@ When designing the application we need
 We can do it manually, or use the generator bundled with angular
 
 ```
-    ng generate component TableComponent
+    ng generate component table
 ```
 
