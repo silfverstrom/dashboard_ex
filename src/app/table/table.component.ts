@@ -17,10 +17,9 @@ export class TableComponent implements OnInit {
   }
   ngOnInit() {
     this.dataService.getStream().subscribe((res) => {
-      console.log('res', res)
       if (!res || !res.data) return;
       let capped = [];
-      for(let i = this.startPage; i < 20; i++) {
+      for(let i = this.startPage * 20; i < (this.startPage + 1) * 20; i++) {
         capped.push(res.data[i])
       }
       this.tableData = capped;
